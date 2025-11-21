@@ -87,12 +87,12 @@ public class actions extends base {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         try {
-            // Step 1: Open Year dropdown
+            
             WebElement yearDropdown = wait.until(ExpectedConditions.elementToBeClickable(
                     By.xpath("//div[contains(@class,'flex justify-end ')]//button")));
             yearDropdown.click();
 
-            // Step 2: Select Year
+    
             List<WebElement> yearOptions = driver.findElements(By.cssSelector("[role='option']"));
             for (WebElement option : yearOptions) {
                 if (option.getText().trim().equals(String.valueOf(targetYear))) {
@@ -101,7 +101,7 @@ public class actions extends base {
                 }
             }
 
-            // Step 3: Handle Month Navigation
+           
             WebElement prevBtn = driver.findElement(By.cssSelector("button[aria-label='Go to previous month']"));
             WebElement nextBtn = driver.findElement(By.cssSelector("button[aria-label='Go to next month']"));
 
@@ -176,13 +176,13 @@ public class actions extends base {
 	        js.executeScript("arguments[0].scrollTop = 0;", div);
 	    }
 
-	    // Scroll inside div by pixels
+	    
 	    public void scrollDivByPixels(WebElement InDiv, int pixels) {
 	      
 	        js.executeScript("arguments[0].scrollTop = arguments[0].scrollTop + " + pixels + ";", InDiv);
 	    }
 
-	    // Scroll to element inside div
+	   
 	    public void scrollToElementInsideDiv(By parentDiv, By innerElement) {
 	        WebElement div = driver.findElement(parentDiv);
 	        WebElement element = driver.findElement(innerElement);
