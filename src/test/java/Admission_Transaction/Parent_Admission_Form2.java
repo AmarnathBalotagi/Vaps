@@ -1,7 +1,6 @@
 package Admission_Transaction;
 
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -11,7 +10,7 @@ import Base.base;
 import Pages.Admission;
 import Pages.LoginPage;
 
-public class Preadmission_Form extends base {
+public class Parent_Admission_Form2 extends base {
 	
 	LoginPage lp;
     actions ac;
@@ -26,7 +25,7 @@ public void setUpTest(@Optional("chrome") String browser) {
 }
 @Test(priority = 1)
 public void preadmissionFormTest() throws InterruptedException {
-    	lp.adminLogin("Adminvv", "Password@123");
+    	lp.adminLogin("Next", "Amar@123");
     	adm.navigateToPreadmissionApplication();  	
 }
 @Test(priority = 2)

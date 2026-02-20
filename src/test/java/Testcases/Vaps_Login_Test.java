@@ -22,7 +22,7 @@ public class Vaps_Login_Test extends base  {
     public void setUpTest(String browser) {
         base.setup(browser);
         lp = new LoginPage(getDriver());
-        ac = new actions(getDriver());
+        ac = new actions();
     }
 	
 	@Test(priority = 1)
