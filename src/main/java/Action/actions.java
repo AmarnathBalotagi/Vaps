@@ -191,14 +191,13 @@ public class actions extends base {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
         try {
-            // Step 1: Open Year dropdown
+            
             WebElement yearDropdown = wait.until(ExpectedConditions.elementToBeClickable(
                     By.xpath("//div[contains(@class,'flex justify-end ')]//button")));
             yearDropdown.click();
 
-            // Step 2: Select Year
-            List<WebElement> yearOptions = getDriver().findElements(By.cssSelector("[role='option']"));
-           
+    
+            List<WebElement> yearOptions = driver.findElements(By.cssSelector("[role='option']"));
             for (WebElement option : yearOptions) {
             	System.out.println(option.getText().trim());
                 if (option.getText().trim().equals(String.valueOf(targetYear))) {
@@ -209,9 +208,9 @@ public class actions extends base {
                 }
             }
 
-            // Step 3: Handle Month Navigation
-            WebElement prevBtn = getDriver().findElement(By.cssSelector("button[aria-label='Go to previous month']"));
-            WebElement nextBtn = getDriver().findElement(By.cssSelector("button[aria-label='Go to next month']"));
+           
+            WebElement prevBtn = driver.findElement(By.cssSelector("button[aria-label='Go to previous month']"));
+            WebElement nextBtn = driver.findElement(By.cssSelector("button[aria-label='Go to next month']"));
 
             String[] months = {"January", "February", "March", "April", "May", "June",
                                "July", "August", "September", "October", "November", "December"};
@@ -326,16 +325,16 @@ public class actions extends base {
 	        js.executeScript("arguments[0].scrollTop = 0;", div);
 	    }
 
-	    // Scroll inside div by pixels
+	    
 	    public void scrollDivByPixels(WebElement InDiv, int pixels) {
 	      
 	        js.executeScript("arguments[0].scrollTop = arguments[0].scrollTop + " + pixels + ";", InDiv);
 	    }
 
-	    // Scroll to element inside div
-	    public void scrollToElementInsideDiv(String  parentDiv, WebElement element) {
-	        WebElement div = getDriver().findElement(By.xpath(parentDiv));
 	   
+	    public void scrollToElementInsideDiv(By parentDiv, By innerElement) {
+	        WebElement div = driver.findElement(parentDiv);
+	        WebElement element = driver.findElement(innerElement);
 	        js.executeScript("arguments[0].scrollTop = arguments[1].offsetTop;", div, element);
 	    }
 }
