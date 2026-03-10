@@ -1,11 +1,12 @@
 package Pages;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,9 +17,12 @@ import Base.base;
 
 public class Admission extends base {
 	WebDriver driver;
-	actions ac = new actions(getDriver());
+	actions ac = new actions();
+	//Actions AC = new Actions(getDriver());
 	WebDriverWait wait ;
-	@FindBy (xpath="//span[text()='Admission']")
+	@FindBy (xpath="//span[text()='Operation Tools']")
+	WebElement Operation_Tools;
+	@FindBy (xpath="//p[text()='Admission']/../..")
 	WebElement Admission;
 	@FindBy (xpath="//span[text()='Masters']")
 	WebElement Adm_Masters;
@@ -42,7 +46,7 @@ public class Admission extends base {
 	WebElement Email_ID;
 	@FindBy (id="pasR_AadharNo")		
 	WebElement Aadhar_No;
-	@FindBy (id="pasR_MobileNo")		
+	@FindBy (xpath ="//input[@id='pasR_MobileNo']")		
 	WebElement Mobile_No;
 	@FindBy (xpath="(//button[@role='combobox'])[1]")		
 	WebElement Select_Religion;
@@ -92,52 +96,64 @@ public class Admission extends base {
 	
 	
 	public void navigateToPreadmissionApplication() throws InterruptedException {
-		Admission.click();
-		ac.Click(Adm_Masters);
+		Operation_Tools.click();
+		getDriver().navigate().to("https://ivrm-uat1-next.azurewebsites.net/admission/preadmission/transactions/application-form");
+		//Admission.click();
+		//ac.setZoomPercentageAction(70);
+		ac.setZoom2(70);
+		/*ac.scrollElementToMiddle(Adm_Transactions);
 		ac.Click(Adm_Transactions);
+		ac.scrollElementToMiddle(Preadmission_App);
+		wait.until(ExpectedConditions.elementToBeClickable(Preadmission_App));*/
+		Thread.sleep(3000);
 		ac.Click(Preadmission_App);
+		
 	}
 
 	public void fillPreadmissionForm() throws InterruptedException {
 	    Thread.sleep(2000);
 		ac.scrollto(upload_Photo);
 		Photo_student.sendKeys(StudentPhoto);
-		First_Name.sendKeys("John");
-		Middle_Name.sendKeys("M");
-		Last_Name.sendKeys("Doe");	
+		First_Name.sendKeys("Sai");
+		Middle_Name.sendKeys("A");
+		Last_Name.sendKeys("Loma");	
 		dob.click();
-		ac.selectDate(driver,2021,"June", 15);
+		ac.selectDate(2022,"June",15);
 		Mobile_No.click();
 		Mobile_No.sendKeys("9876543210");
+	//	ac.Input(Birth_Place, "LapLand");
 		Birth_Place.sendKeys("lapland");
 		ac.dropdownSelect("Religion", "CHRISTIAN");
 		ac.dropdownSelect("Caste", "Baptism");
 		ac.dropdownSelect("Gender", "Male");
 		Class.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='LKG']/..")));
-        WebElement option = driver.findElement(By.xpath("//span[text()='LKG']/.."));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Pre Nursery Amar']/..")));
+        WebElement option = driver.findElement(By.xpath("//span[text()='Pre Nursery Amar']/.."));
         option.click();
         ac.scrollDivByPixels(InDiv,120);
-		Email_ID.sendKeys("Auto@gmail.com");
+		Email_ID.sendKeys("darshand087@gmail.com");
 		
 		Thread.sleep(2000);
 		ac.dropdownSelect("Nationality", "India");
 		Aadhar_No.sendKeys("888840401212");
+		ac.scrollDivByPixels(InDiv,120);
 		
 		ac.dropdownSelect("option", "Yes");
 		Thread.sleep(2000);
-		ac.scrollVertical(50);
+		ac.scrollVertical(150);
+		//ac.forceScroll(Next);
 		Next.click();
 		Thread.sleep(2000);
 		ac.scrollElementToMiddle(Next);
 		Next.click();
-		ac.scrollto(Father_Photo);
-		Father_Photo.sendKeys("C:\\Users\\amarn\\eclipse-workspace\\VAPS\\src\\test\\resources\\father.jpg");
+		ac.scrollElementToMiddle(Father_Photo);
+		Father_Photo.sendKeys(FatherPhoto);
 		FatherName.sendKeys("Robert Auto");
 		ac.dropdownSelect("Nationality", "India");
-		ac.scrollto(Mother_Photo);
-		Mother_Photo.sendKeys("C:\\Users\\amarn\\eclipse-workspace\\VAPS\\src\\test\\resources\\Mother.jpg");
+		ac.scrollElementToMiddle(Mother_Photo);
+		Mother_Photo.sendKeys(MotherPhoto);
 		MotherName.sendKeys("Emily Auto");
+		
 		ac.dropdownSelect("Nationality", "India");
 		Next.click();
 		for (WebElement docUpload : docUploadList) {
